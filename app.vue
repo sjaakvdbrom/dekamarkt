@@ -22,18 +22,19 @@
 
 <script setup>
   const filtered = ref(false)
+  const filteredProducts = ref([]);
   
   const { data: products } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
   const brands = [...new Set(products.value.map((item) => item.Brand))];
 
   const filter = (brand) => {
     filtered.value = true
-    products.value = products.value.filter((item) => item.Brand === brand);
+    filteredProducts.value = products.value.filter((item) => item.Brand === brand);
   }
 
   const reset = () => {
     filtered.value = false
-    // reset
+    filteredProducts.value = [];
   }
 
 </script>
@@ -47,16 +48,30 @@
       <button v-if="filtered === true" @click="reset">Reset filters</button>
     </div>
     <div class="items-container">
-      <div v-for="product in products" :key="product.ProductID" class="item">
-        <ul>
-          <li>{{product.MainDescription}}</li>
-          <li v-if="product.SubDescription">{{product.SubDescription}}</li>
-          <li>{{ product.Brand }}</li>
-          <li v-for="groups in product.WebSubGroups" :key="groups.WebSubGroupID">
-            {{ groups.Description }}
-          </li>
-        </ul>
-      </div>
+      <template v-if="filteredProducts.length > 0">
+        <div v-for="product in filteredProducts" :key="product.ProductID" class="item">
+          <ul>
+            <li>{{product.MainDescription}}</li>
+            <li v-if="product.SubDescription">{{product.SubDescription}}</li>
+            <li>{{ product.Brand }}</li>
+            <li v-for="groups in product.WebSubGroups" :key="groups.WebSubGroupID">
+              {{ groups.Description }}
+            </li>
+          </ul>
+        </div>
+      </template>
+      <template v-else>
+        <div v-for="product in products" :key="product.ProductID" class="item">
+          <ul>
+            <li>{{product.MainDescription}}</li>
+            <li v-if="product.SubDescription">{{product.SubDescription}}</li>
+            <li>{{ product.Brand }}</li>
+            <li v-for="groups in product.WebSubGroups" :key="groups.WebSubGroupID">
+              {{ groups.Description }}
+            </li>
+          </ul>
+        </div>
+      </template>
     </div>
   </div>
 </template>
