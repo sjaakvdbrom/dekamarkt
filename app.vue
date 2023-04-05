@@ -21,20 +21,33 @@
 </style>
 
 <script setup>
-  const { data } = await useFetch('https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd')
+  const filtered = ref(false)
+  
+  const { data: products } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
+  const brands = [...new Set(products.value.map((item) => item.Brand))];
 
-  const filter = () => {
-    data.value = data.value.filter((item) => item.MainDescription === 'Bastogne');
+  const filter = (brand) => {
+    filtered.value = true
+    products.value = products.value.filter((item) => item.Brand === brand);
   }
+
+  const reset = () => {
+    filtered.value = false
+    // reset
+  }
+
 </script>
 
 <template>
   <div class="container">
-    <div class="items-container">
-      <div>
-        <button @click="filter">Filter bastogne</button>
+    <div v-if="products">
+      <div v-for="(brand, index) in brands" :key="index">
+        <button @click="filter(brand)">{{ brand }}</button>
       </div>
-      <div v-for="product in data" :key="product.ProductID" class="item">
+      <button v-if="filtered === true" @click="reset">Reset filters</button>
+    </div>
+    <div class="items-container">
+      <div v-for="product in products" :key="product.ProductID" class="item">
         <ul>
           <li>{{product.MainDescription}}</li>
           <li v-if="product.SubDescription">{{product.SubDescription}}</li>
