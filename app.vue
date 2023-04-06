@@ -12,12 +12,6 @@
     flex-wrap: wrap;
     gap: 20px;
   }
-  .item {
-    width: 25%;
-    padding: 15px;
-    background-color: #fff;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5)
-  }
 </style>
 
 <script setup>
@@ -31,6 +25,7 @@
     originalProducts.value = toRaw(data.value)
     products.value = toRaw(data.value)
     brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
+    // console.log(toRaw(data.value))
   }
   
   const filter = (brand) => {
@@ -56,18 +51,7 @@
       <button v-if="filtered === true" @click="reset">Reset filters</button>
     </div>
     <div class="items-container">
-      <template v-if="products.length">
-        <div v-for="product in products" :key="product.ProductID" class="item">
-          <ul>
-            <li>{{product.MainDescription}}</li>
-            <li v-if="product.SubDescription">{{product.SubDescription}}</li>
-            <li>{{ product.Brand }}</li>
-            <li v-for="groups in product.WebSubGroups" :key="groups.WebSubGroupID">
-              {{ groups.Description }}
-            </li>
-          </ul>
-        </div>
-      </template>
+      <Products v-if="products.length" :products="products" />
     </div>
   </div>
 </template>
