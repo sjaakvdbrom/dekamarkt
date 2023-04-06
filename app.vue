@@ -22,24 +22,25 @@
 
 <script setup>
   const filtered = ref(false)
-  const filteredProducts = ref([]);
+  const originalProducts = ref([]);
   const products = ref([]);
   const brands = ref([]);
   
   const getProducts = async () => {
     const { data } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
+    originalProducts.value = toRaw(data.value)
     products.value = toRaw(data.value)
     brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
   }
   
   const filter = (brand) => {
     filtered.value = true
-    filteredProducts.value = products.value.filter((item) => item.Brand === brand);
+    products.value = originalProducts.value.filter((item) => item.Brand === brand);
   }
 
   const reset = () => {
     filtered.value = false
-    filteredProducts.value = [];
+    products.value = originalProducts.value;
   }
 
   onMounted(getProducts);
@@ -55,19 +56,7 @@
       <button v-if="filtered === true" @click="reset">Reset filters</button>
     </div>
     <div class="items-container">
-      <template v-if="filteredProducts.length > 0">
-        <div v-for="product in filteredProducts" :key="product.ProductID" class="item">
-          <ul>
-            <li>{{product.MainDescription}}</li>
-            <li v-if="product.SubDescription">{{product.SubDescription}}</li>
-            <li>{{ product.Brand }}</li>
-            <li v-for="groups in product.WebSubGroups" :key="groups.WebSubGroupID">
-              {{ groups.Description }}
-            </li>
-          </ul>
-        </div>
-      </template>
-      <template v-else>
+      <template v-if="products.length">
         <div v-for="product in products" :key="product.ProductID" class="item">
           <ul>
             <li>{{product.MainDescription}}</li>
