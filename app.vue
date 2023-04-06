@@ -1,4 +1,9 @@
 <style>
+  body {
+    margin: 0;
+    padding: 20px;
+  }
+
   .container {
     margin: 0 auto;
     max-width: 1200px;
