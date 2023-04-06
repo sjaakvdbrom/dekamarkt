@@ -23,10 +23,15 @@
 <script setup>
   const filtered = ref(false)
   const filteredProducts = ref([]);
+  const products = ref([]);
+  const brands = ref([]);
   
-  const { data: products } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
-  const brands = [...new Set(products.value.map((item) => item.Brand))];
-
+  const getProducts = async () => {
+    const { data } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
+    products.value = toRaw(data.value)
+    brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
+  }
+  
   const filter = (brand) => {
     filtered.value = true
     filteredProducts.value = products.value.filter((item) => item.Brand === brand);
@@ -37,11 +42,13 @@
     filteredProducts.value = [];
   }
 
+  onMounted(getProducts);
+
 </script>
 
 <template>
-  <div class="container">
-    <div v-if="products">
+  <div class="container" v-if="products.length">
+    <div>
       <div v-for="(brand, index) in brands" :key="index">
         <button @click="filter(brand)">{{ brand }}</button>
       </div>
