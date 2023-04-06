@@ -9,6 +9,12 @@
   }
 </style>
 
+<style scoped>
+  .active {
+    font-weight: bold;
+  }
+</style>
+
 <script setup>
   const filtered = ref(false)
   const originalProducts = ref([]);
@@ -23,9 +29,10 @@
     console.log(toRaw(data.value))
   }
   
-  const filter = (brand) => {
+  const filter = (event, brand) => {
     filtered.value = true
     products.value = originalProducts.value.filter((item) => item.Brand === brand);
+    event.target.classList.toggle('active')
   }
 
   const reset = () => {
@@ -41,7 +48,7 @@
   <div class="container" v-if="products.length">
     <div>
       <div v-for="(brand, index) in brands" :key="index">
-        <button @click="filter(brand)">{{ brand }}</button>
+        <button @click="event => filter(event, brand)">{{ brand }}</button>
       </div>
       <button v-if="filtered === true" @click="reset">Reset filters</button>
     </div>

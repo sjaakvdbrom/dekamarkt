@@ -21,8 +21,6 @@
   }
 
   .title {
-    display: flex;
-    column-gap: 5px;
     font-size: 16px;
     font-weight: bold;
   }
@@ -47,24 +45,24 @@
 </style>
 
 <script setup>
-const props = defineProps(['products'])
+  const props = defineProps(['products'])
 </script>
 
 <template>
   <div class="items-container">
     <article v-for="product in props.products" :key="product.ProductID" class="item">
-      <img :src="product.ProductPictures[0].Url" class="image"/>
+      <img v-if="product.ProductPictures.length" :src="product.ProductPictures[0].Url" class="image"/>
+      <h2 class="title">
+        {{product.MainDescription}} {{product.SubDescription}} {{product.CommercialContent}}
+      </h2>
       <ul>
-        <h2 class="title">
-          <span v-if="product.MainDescription">{{product.MainDescription}}</span>
-          <span v-if="product.SubDescription">{{product.SubDescription}}</span>
-          <span v-if="product.CommercialContent">{{product.CommercialContent}}</span>
-        </h2>
-        
         <li>{{ product.Brand }}</li>
+        <li>{{ product.SubGroup.Description }}</li>
         <li v-for="groups in product.WebSubGroups" :key="groups.WebSubGroupID">
           {{ groups.Description }}
         </li>
+        <li v-if="product.ProductPrices.length">{{ product.ProductPrices[0].Price }}</li>
+        <li v-if="product.ProductOffers.length">{{ product.ProductOffers[0].Offer.OfferPrice }}</li>
       </ul>
     </article>
   </div>
