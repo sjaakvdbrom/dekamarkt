@@ -9,6 +9,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "normalize.css": "^8.0.1",
     "nuxt": "^3.3.3"
   }
 }
