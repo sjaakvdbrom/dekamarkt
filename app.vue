@@ -1,4 +1,4 @@
-<style scoped>
+<style>
   .container {
     margin: 0 auto;
     max-width: 1200px;
@@ -6,11 +6,6 @@
 
   * {
     box-sizing: border-box;
-  }
-  .items-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
   }
 </style>
 
@@ -25,7 +20,7 @@
     originalProducts.value = toRaw(data.value)
     products.value = toRaw(data.value)
     brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
-    // console.log(toRaw(data.value))
+    console.log(toRaw(data.value))
   }
   
   const filter = (brand) => {
@@ -50,8 +45,6 @@
       </div>
       <button v-if="filtered === true" @click="reset">Reset filters</button>
     </div>
-    <div class="items-container">
-      <Products v-if="products.length" :products="products" />
-    </div>
+    <Products v-if="products.length" :products="products" />    
   </div>
 </template>
