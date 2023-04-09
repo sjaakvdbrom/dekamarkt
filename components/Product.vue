@@ -36,10 +36,6 @@
     margin-bottom: 15px;
   }
 
-  .hidden {
-    display: none;
-  }
-
   @media (min-width: 600px) {
     .item {
         --flex-items: 2;
@@ -62,6 +58,12 @@
 <script setup>
   const props = defineProps(['product']);
   const quantity = ref(1);
+  const emit = defineEmits(['addtocart'])
+
+  const add = (id, qty) => {
+    emit('addtocart', id, qty)
+    quantity.value = 1
+  }
 </script>
 
 <template>
@@ -73,18 +75,10 @@
         {{product.MainDescription}} {{product.SubDescription}} 
       </h2>
       <div v-if="product.CommercialContent" class="muted">{{product.CommercialContent}}</div>
-      <ul class="hidden">
-        <li>{{ product.Brand }}</li>
-        <li>{{ product.SubGroup.Description }}</li>
-        <li v-for="groups in product.WebSubGroups" :key="groups.WebSubGroupID">
-          {{ groups.Description }}
-        </li>
-        <li v-if="product.ProductOffers.length">{{ product.ProductOffers[0].Offer.OfferPrice }}</li>
-      </ul>
       <div class="product-price">
         <Price :price="product.ProductPrices[0].Price"/>
       </div>
       <input type="number" v-model="quantity">
-      <Button @click="$emit('addtocart', product.ProductID, quantity)">In winkelwagen</Button>
+      <Button @click="add(product.ProductID, quantity)">In winkelwagen</Button>
     </article>
 </template>
