@@ -11,12 +11,13 @@
     width: calc((100% / var(--flex-items)) - (((var(--flex-items) - 1) / var(--flex-items)) * var(--flex-gap)));
     padding: 15px;
     background-color: #fff;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5)
+    border: 1px solid #e5e5e5;
+    border-radius: 25px;
   }
 
   .image {
     object-fit: contain;
-    height: 150px;
+    height: 200px;
     width: 100%;
   }
 

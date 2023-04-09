@@ -1,4 +1,11 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-
-})
+export default {
+  buildModules: [
+    '@nuxtjs/google-fonts'
+  ],
+  googleFonts: {
+    families: {
+      Inter : true,
+    },
+    subsets: 'latin'
+  }
+}
