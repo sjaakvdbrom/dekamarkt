@@ -14,7 +14,7 @@
 <template>
   <div class="items-container">
     <template v-for="product in props.products" :key="product.ProductID">
-      <Product :product="product" @addtocart="(e, n) => $emit('addtocart', e, n)"/>
+      <Product :product="product" @addtocart="(id, qty) => $emit('addtocart', id, qty)"/>
     </template>
   </div>
 </template>

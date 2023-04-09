@@ -40,6 +40,7 @@
   const cartProducts = ref([]);
   
   const getProducts = async () => {
+    // TODO: hide api key
     const { data } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
     originalProducts.value = toRaw(data.value)
     products.value = toRaw(data.value)
@@ -58,18 +59,18 @@
     products.value = originalProducts.value;
   }
 
-  const addProduct = (event, n) => {
-    if (cartProducts.value.find(e => e.id === event)) {
+  const addProduct = (id, qty) => {
+    if (cartProducts.value.find(e => e.id === id)) {
       // If product is already in cart then...
-      cartProducts.value.filter((e => e.id === event)).map(item => {
+      cartProducts.value.filter((e => e.id === id)).map(item => {
         // Add one to current quantity
-        item.quantity = item.quantity + n
+        item.quantity = item.quantity + qty
       })
     } else {
       // Else push new product to cartproducts
       cartProducts.value.push({
-        'id': event,
-        'quantity': n
+        'id': id,
+        'quantity': qty
       })
     }
   }
@@ -91,6 +92,6 @@
         {{ product.id }} x {{ product.quantity }}
       </div>
     </div>
-    <Products v-if="products.length" :products="products" @addtocart="(e, n) => addProduct(e, n)" />    
+    <Products v-if="products.length" :products="products" @addtocart="(id, qty) => addProduct(id, qty)" />    
   </div>
 </template>
