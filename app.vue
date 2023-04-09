@@ -38,6 +38,7 @@
   const products = ref([]);
   const brands = ref([]);
   const cartProducts = ref([]);
+  const brandButton = ref(null)
   
   const getProducts = async () => {
     // TODO: hide api key
@@ -49,12 +50,14 @@
   }
   
   const filter = (event, brand) => {
+    toRaw(brandButton.value).map(item => item.classList.remove('active'))
     filtered.value = true
     products.value = originalProducts.value.filter((item) => item.Brand === brand);
     event.target.classList.toggle('active')
   }
 
   const reset = () => {
+    toRaw(brandButton.value).map(item => item.classList.remove('active'))
     filtered.value = false
     products.value = originalProducts.value;
   }
@@ -83,7 +86,7 @@
   <div class="container" v-if="products.length">
     <div>
       <div v-for="(brand, index) in brands" :key="index">
-        <button @click="event => filter(event, brand)">{{ brand }}</button>
+        <button @click="event => filter(event, brand)" ref="brandButton">{{ brand }}</button>
       </div>
       <button v-if="filtered === true" @click="reset">Reset filters</button>
     </div>
