@@ -37,13 +37,14 @@
   const originalProducts = ref([]);
   const products = ref([]);
   const brands = ref([]);
+  const cartProducts = ref([]);
   
   const getProducts = async () => {
     const { data } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
     originalProducts.value = toRaw(data.value)
     products.value = toRaw(data.value)
     brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
-    console.log(toRaw(data.value))
+    // console.log(toRaw(data.value))
   }
   
   const filter = (event, brand) => {
@@ -55,6 +56,17 @@
   const reset = () => {
     filtered.value = false
     products.value = originalProducts.value;
+  }
+
+  const addProduct = (event) => {
+    if (cartProducts.value.find(e => e.id === event)) {
+      // TODO: increase qty by 1
+    } else {
+      cartProducts.value.push({
+        'id': event,
+        'quantity': 1
+      })
+    }
   }
 
   onMounted(getProducts);
@@ -69,6 +81,11 @@
       </div>
       <button v-if="filtered === true" @click="reset">Reset filters</button>
     </div>
-    <Products v-if="products.length" :products="products" />    
+    <div v-if="cartProducts.length">
+      <div v-for="product in cartProducts" :key="product.id">
+        {{ product.id }} x {{ product.quantity }}
+      </div>
+    </div>
+    <Products v-if="products.length" :products="products" @addtocart="(e) => addProduct(e)" />    
   </div>
 </template>

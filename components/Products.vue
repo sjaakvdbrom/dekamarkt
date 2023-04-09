@@ -24,6 +24,7 @@
     object-fit: contain;
     aspect-ratio: 1;
     max-height: 200px;
+    max-width: 100%;
   }
 
   .title {
@@ -90,7 +91,7 @@
       <div class="product-price">
         <Price :price="product.ProductPrices[0].Price"/>
       </div>
-      <Button>In winkelwagen</Button>
+      <Button @click="$emit('addtocart', product.ProductID)">In winkelwagen</Button>
     </article>
   </div>
 </template>
