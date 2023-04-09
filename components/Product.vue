@@ -5,6 +5,7 @@
     flex-direction: column;
     width: calc((100% / var(--flex-items)) - (((var(--flex-items) - 1) / var(--flex-items)) * var(--flex-gap)));
     padding: 15px;
+    border: 1px solid #dedede;
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
   }
