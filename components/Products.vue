@@ -10,20 +10,40 @@
     --flex-items: 1;
     width: calc((100% / var(--flex-items)) - (((var(--flex-items) - 1) / var(--flex-items)) * var(--flex-gap)));
     padding: 15px;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 25px;
+    box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+  }
+
+  .image-link {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
   }
 
   .image {
     object-fit: contain;
-    height: 200px;
-    width: 100%;
+    aspect-ratio: 1;
+    max-height: 200px;
   }
 
   .title {
+    margin-bottom: 10px;
     font-size: 16px;
     font-weight: bold;
+  }
+
+  .muted {
+    margin-bottom: 10px;
+    color: #888;
+    font-size: 14px;
+  }
+
+  .product-price {
+    margin-bottom: 15px;
+  }
+
+  .hidden {
+    display: none;
   }
 
   @media (min-width: 600px) {
@@ -52,19 +72,25 @@
 <template>
   <div class="items-container">
     <article v-for="product in props.products" :key="product.ProductID" class="item">
-      <img v-if="product.ProductPictures.length" :src="product.ProductPictures[0].Url" class="image"/>
+      <a class="image-link">
+        <img v-if="product.ProductPictures.length" :src="product.ProductPictures[0].Url" class="image"/>
+      </a>
       <h2 class="title">
-        {{product.MainDescription}} {{product.SubDescription}} {{product.CommercialContent}}
+        {{product.MainDescription}} {{product.SubDescription}} 
       </h2>
-      <ul>
+      <div v-if="product.CommercialContent" class="muted">{{product.CommercialContent}}</div>
+      <ul class="hidden">
         <li>{{ product.Brand }}</li>
         <li>{{ product.SubGroup.Description }}</li>
         <li v-for="groups in product.WebSubGroups" :key="groups.WebSubGroupID">
           {{ groups.Description }}
         </li>
-        <li v-if="product.ProductPrices.length">{{ product.ProductPrices[0].Price }}</li>
         <li v-if="product.ProductOffers.length">{{ product.ProductOffers[0].Offer.OfferPrice }}</li>
       </ul>
+      <div class="product-price">
+        <Price :price="product.ProductPrices[0].Price"/>
+      </div>
+      <Button>In winkelwagen</Button>
     </article>
   </div>
 </template>
