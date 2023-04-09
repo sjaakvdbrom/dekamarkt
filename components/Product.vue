@@ -32,8 +32,47 @@
     font-size: 14px;
   }
 
+  .button {
+    width: 100%;
+  }
+
   .product-price {
     margin-bottom: 15px;
+  }
+
+  .quantity-controller {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  .quantity {
+    width: 35px;
+    text-align: center;
+    appearance: none;
+    -moz-appearance: textfield;
+    border: 1px solid #dedede;
+  }
+
+  .quantity::-webkit-outer-spin-button,
+  .quantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .qty-btn {
+    padding: 8px;
+    appearance: none;
+    border: none;
+    background-color: #dedede;
+    cursor: pointer;
+  }
+
+  .qty-btn--minus {
+    border-radius: 3px 0 0 3px;
+  }
+
+  .qty-btn--add {
+    border-radius: 0 3px 3px 0;
   }
 
   @media (min-width: 600px) {
@@ -45,6 +84,19 @@
   @media (min-width: 940px) {
     .item {
         --flex-items: 3;
+    }
+
+    .button-wrapper {
+      display: flex;
+      gap: 5px;
+    }
+
+    .button-wrapper .button {
+      flex: 1;
+    }
+
+    .quantity-controller {
+      margin-bottom: 0;
     }
   }
 
@@ -78,7 +130,13 @@
       <div class="product-price">
         <Price :price="product.ProductPrices[0].Price"/>
       </div>
-      <input type="number" v-model="quantity">
-      <Button @click="add(product.ProductID, quantity)">In winkelwagen</Button>
+      <div class="button-wrapper">
+        <div class="quantity-controller">
+          <button @click="quantity > 1 ? quantity-- : ''" type="button" class="qty-btn qty-btn--minus">-</button>
+          <input type="number" v-model="quantity" class="quantity">
+          <button @click="quantity++" type="button" class="qty-btn qty-btn--add">+</button>
+        </div>
+        <Button @click="add(product.ProductID, quantity)">In winkelwagen</Button>
+      </div>
     </article>
 </template>
