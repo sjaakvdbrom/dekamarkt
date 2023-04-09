@@ -186,6 +186,6 @@
         </template>
       </div>
     </div>
-    <Products v-if="products.length" :products="products" @addtocart="(id, qty) => addProduct(id, qty)" />    
+    <Grid v-if="products.length" :products="products" @addtocart="(id, qty) => addProduct(id, qty)" />    
   </div>
 </template>
