@@ -1,6 +1,8 @@
 <style scoped>
 .item {
     --flex-items: 1;
+    display: flex;
+    flex-direction: column;
     width: calc((100% / var(--flex-items)) - (((var(--flex-items) - 1) / var(--flex-items)) * var(--flex-gap)));
     padding: 15px;
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
@@ -27,6 +29,7 @@
   }
 
   .muted {
+    margin-top: auto;
     margin-bottom: 10px;
     color: #888;
     font-size: 14px;
@@ -120,8 +123,8 @@
 
 <template>
   <article class="item">
-      <a class="image-link">
-        <img v-if="product.ProductPictures.length" :src="product.ProductPictures[0].Url" class="image"/>
+      <a v-if="product.ProductPictures.length" class="image-link">
+        <img :src="product.ProductPictures[0].Url" class="image"/>
       </a>
       <h2 class="title">
         {{product.MainDescription}} {{product.SubDescription}} 

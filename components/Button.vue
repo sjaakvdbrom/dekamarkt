@@ -3,6 +3,7 @@
     display: inline-block;
     padding: 8px 16px;
     background-color: #87be34;
+    font-size: 15px;
     border: none;
     color: #fff;
     border-radius: 3px;
