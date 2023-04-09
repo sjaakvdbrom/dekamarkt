@@ -60,8 +60,13 @@
 
   const addProduct = (event) => {
     if (cartProducts.value.find(e => e.id === event)) {
-      // TODO: increase qty by 1
+      // If product is already in cart then...
+      cartProducts.value.filter((e => e.id === event)).map(item => {
+        // Add one to current quantity
+        item.quantity = item.quantity + 1
+      })
     } else {
+      // Else push new product to cartproducts
       cartProducts.value.push({
         'id': event,
         'quantity': 1
