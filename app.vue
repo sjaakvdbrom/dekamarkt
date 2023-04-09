@@ -58,18 +58,18 @@
     products.value = originalProducts.value;
   }
 
-  const addProduct = (event) => {
+  const addProduct = (event, n) => {
     if (cartProducts.value.find(e => e.id === event)) {
       // If product is already in cart then...
       cartProducts.value.filter((e => e.id === event)).map(item => {
         // Add one to current quantity
-        item.quantity = item.quantity + 1
+        item.quantity = item.quantity + n
       })
     } else {
       // Else push new product to cartproducts
       cartProducts.value.push({
         'id': event,
-        'quantity': 1
+        'quantity': n
       })
     }
   }
@@ -91,6 +91,6 @@
         {{ product.id }} x {{ product.quantity }}
       </div>
     </div>
-    <Products v-if="products.length" :products="products" @addtocart="(e) => addProduct(e)" />    
+    <Products v-if="products.length" :products="products" @addtocart="(e, n) => addProduct(e, n)" />    
   </div>
 </template>

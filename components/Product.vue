@@ -61,6 +61,7 @@
 
 <script setup>
   const props = defineProps(['product']);
+  const quantity = ref(1);
 </script>
 
 <template>
@@ -83,7 +84,7 @@
       <div class="product-price">
         <Price :price="product.ProductPrices[0].Price"/>
       </div>
-      <input type="number" value="1">
-      <Button @click="$emit('addtocart', product.ProductID)">In winkelwagen</Button>
+      <input type="number" v-model="quantity">
+      <Button @click="$emit('addtocart', product.ProductID, quantity)">In winkelwagen</Button>
     </article>
 </template>
