@@ -35,6 +35,10 @@
     border-radius: 5px;
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
   }
+
+  .cart-product:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
   .active {
     font-weight: bold;
   }
@@ -120,7 +124,7 @@
   
   const filter = (event, brand) => {
     toRaw(brandButton.value).map(item => item.classList.remove('active'))
-    // TODO: allow for filtering on multiple conditions
+    // TODO: allow for filtering multiple conditions
     filtered.value = true
     products.value = originalProducts.value.filter((item) => item.Brand === brand);
     event.target.classList.toggle('active')
@@ -154,11 +158,12 @@
 
 <template>
   <div class="container" v-if="products.length">
+    <!-- TODO: get category name -->
     <h1>Koeken</h1>
     <div v-if="cartProducts.length">
       <h2 class="title">Winkelwagen</h2>
       <div class="cart">
-        <div v-for="product in cartProducts" :key="product.id">
+        <div v-for="product in cartProducts" :key="product.id" class="cart-product">
           {{ product.id }} x {{ product.quantity }}
         </div>
       </div>
