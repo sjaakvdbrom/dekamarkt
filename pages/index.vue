@@ -1,35 +1,3 @@
-<style>
-  @import "normalize.css";
-
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font-family: 'Inter';
-  }
-
-  .container {
-    margin: 0 auto;
-    max-width: 1200px;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin-top: 0;
-  }
-</style>
-
 <template>
   <div class="container">
     <h1>Homepage</h1>
