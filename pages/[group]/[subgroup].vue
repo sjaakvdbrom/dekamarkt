@@ -20,7 +20,7 @@
 </script>
 
 <template>
-  <div class="container">
+  <div class="page-container container">
     <!-- TODO: get category name -->
     <h1>Koeken</h1>
     <Cart />
