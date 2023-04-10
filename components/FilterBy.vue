@@ -45,9 +45,18 @@
   }
 
   .filter-list {
+    --flex-gap: 10px;
     margin: 0;
     padding: 0;
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter {
+    --flex-items: 1;
+    width: calc((100% / var(--flex-items)) - (((var(--flex-items) - 1) / var(--flex-items)) * var(--flex-gap)));
   }
 
   .filter-label:hover {
@@ -56,12 +65,26 @@
     cursor: pointer;
   }
 
-  .filter:not(:last-of-type) {
-    margin-bottom: 10px;
-  }
-
   .reset {
     margin-top: 15px;
+  }
+
+  @media (min-width: 600px) {
+    .filter {
+        --flex-items: 2;
+    }
+  }
+
+  @media (min-width: 940px) {
+    .filter {
+        --flex-items: 3;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .filter {
+        --flex-items: 4;
+    }
   }
 </style>
 
@@ -85,6 +108,7 @@
     filtered.value = false
     products.value = originalProducts.value;
   }
+  console.log(brands.value)
 </script>
 
 <template>
@@ -96,7 +120,7 @@
             <div class="tab">
               <ul class="filter-list">
                 <li v-for="(brand, index) in brands" :key="index" class="filter">
-                  <label @click="event => filter(event, brand)" ref="brandButton" class="filter-label">{{ brand }}</label>
+                  <label v-if="brand !== null" @click="event => filter(event, brand)" ref="brandButton" class="filter-label">{{ brand }}</label>
                 </li>
               </ul>
               <div v-if="filtered === true" class="reset">

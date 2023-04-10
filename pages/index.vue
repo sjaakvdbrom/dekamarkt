@@ -30,29 +30,10 @@
   }
 </style>
 
-<script setup>
-  const originalProducts = useOriginalProducts();
-  const products = useProducts();
-  const brands = useBrands();
-  const { data } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
-
-  const getProducts = async () => {
-    originalProducts.value = toRaw(data.value)
-    products.value = toRaw(data.value)
-    brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
-    // console.log(toRaw(data.value))
-  }
-  
-  onMounted(getProducts);
-
-</script>
-
 <template>
   <div class="container">
-    <!-- TODO: get category name -->
-    <h1>Koeken</h1>
-    <Cart />
-    <FilterBy />
-    <Grid />    
+    <h1>Homepage</h1>
+    <p>Navigeer naar een categorie pagina door gebruik te maken van de volgende url structuur: url/[group]/[subgroup].</p>
+    <p>Bijvoorbeeld: <NuxtLink to="/55/103" class="nav-link">Koeken</NuxtLink></p>
   </div>
 </template>
