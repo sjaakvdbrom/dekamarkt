@@ -13,6 +13,7 @@
     originalProducts.value = toRaw(data.value)
     products.value = toRaw(data.value)
     brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
+    // console.log(toRaw(data.value))
   }
 
   onMounted(getProducts);

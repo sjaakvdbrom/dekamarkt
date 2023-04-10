@@ -104,11 +104,10 @@
   }
 
   const reset = () => {
-    toRaw(brandButton.value).map(item => item.classList.remove('active'))
+    brandButton.value.map(item => item.classList.remove('active'))
     filtered.value = false
     products.value = originalProducts.value;
   }
-  console.log(brands.value)
 </script>
 
 <template>
