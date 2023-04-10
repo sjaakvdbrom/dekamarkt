@@ -113,12 +113,23 @@
 
 <script setup>
   const props = defineProps(['product']);
+  const cart = useCart();
   const quantity = ref(1);
-  const emit = defineEmits(['addtocart'])
 
-  const add = (id, qty) => {
-    emit('addtocart', id, qty)
-    quantity.value = 1
+  const addProduct = (id, qty) => {
+    if (cart.value.find(e => e.id === id)) {
+      // If product is already in cart then...
+      cart.value.filter((e => e.id === id)).map(item => {
+        // Add one to current quantity
+        item.quantity = item.quantity + qty
+      })
+    } else {
+      // Else push new product to cartproducts
+      cart.value.push({
+        'id': id,
+        'quantity': qty
+      })
+    }
   }
 </script>
 
@@ -140,7 +151,7 @@
           <input type="number" v-model="quantity" class="quantity">
           <button @click="quantity++" type="button" class="qty-btn qty-btn--add">+</button>
         </div>
-        <Button @click="add(product.ProductID, quantity)">In winkelwagen</Button>
+        <Button @click="addProduct(product.ProductID, quantity)">In winkelwagen</Button>
       </div>
     </article>
 </template>

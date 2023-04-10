@@ -45,7 +45,6 @@
   const originalProducts = useOriginalProducts();
   const products = useProducts();
   const brands = useBrands();
-  const cart = useCart();
   
   const getProducts = async () => {
     // TODO: hide api key
@@ -56,22 +55,6 @@
     console.log(toRaw(data.value))
   }
   
-  const addProduct = (id, qty) => {
-    if (cart.value.find(e => e.id === id)) {
-      // If product is already in cart then...
-      cart.value.filter((e => e.id === id)).map(item => {
-        // Add one to current quantity
-        item.quantity = item.quantity + qty
-      })
-    } else {
-      // Else push new product to cartproducts
-      cart.value.push({
-        'id': id,
-        'quantity': qty
-      })
-    }
-  }
-
   onMounted(getProducts);
 
 </script>
@@ -82,6 +65,6 @@
     <h1>Koeken</h1>
     <Cart />
     <FilterBy />
-    <Grid v-if="products.length" @addtocart="(id, qty) => addProduct(id, qty)" />    
+    <Grid />    
   </div>
 </template>

@@ -12,9 +12,9 @@
 </script>
 
 <template>
-  <div class="items-container">
+  <div v-if="products.length" class="items-container">
     <template v-for="product in products" :key="product.ProductID">
-      <Product :product="product" @addtocart="(id, qty) => $emit('addtocart', id, qty)"/>
+      <Product :product="product"/>
     </template>
   </div>
 </template>
