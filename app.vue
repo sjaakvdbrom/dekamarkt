@@ -107,11 +107,11 @@
 
 <script setup>
   const filtered = ref(false)
-  const originalProducts = ref([]);
-  const products = ref([]);
+  const originalProducts = useOriginalProducts();
+  const products = useProducts();
   const brands = ref([]);
   const cartProducts = ref([]);
-  const brandButton = ref(null)
+  const brandButton = ref(null);
   
   const getProducts = async () => {
     // TODO: hide api key
