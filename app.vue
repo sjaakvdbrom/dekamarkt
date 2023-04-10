@@ -26,6 +26,21 @@
   }
 </style>
 
+<style scoped>
+  .cart {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .cart-product:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+</style>
+
 <script setup>
   const originalProducts = useOriginalProducts();
   const products = useProducts();
@@ -67,6 +82,6 @@
     <h1>Koeken</h1>
     <Cart />
     <FilterBy />
-    <Grid v-if="products.length" :products="products" @addtocart="(id, qty) => addProduct(id, qty)" />    
+    <Grid v-if="products.length" @addtocart="(id, qty) => addProduct(id, qty)" />    
   </div>
 </template>

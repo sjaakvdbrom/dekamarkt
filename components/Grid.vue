@@ -8,12 +8,12 @@
 </style>
 
 <script setup>
-  const props = defineProps(['products']);
+  const products = useProducts();
 </script>
 
 <template>
   <div class="items-container">
-    <template v-for="product in props.products" :key="product.ProductID">
+    <template v-for="product in products" :key="product.ProductID">
       <Product :product="product" @addtocart="(id, qty) => $emit('addtocart', id, qty)"/>
     </template>
   </div>
