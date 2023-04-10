@@ -26,26 +26,11 @@
   }
 </style>
 
-<style scoped>
-  .cart {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #dedede;
-    border-radius: 5px;
-    box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
-  }
-
-  .cart-product:not(:last-of-type) {
-    margin-bottom: 10px;
-  }
-</style>
-
 <script setup>
   const originalProducts = useOriginalProducts();
   const products = useProducts();
   const brands = useBrands();
-  const cartProducts = ref([]);
+  const cart = useCart();
   
   const getProducts = async () => {
     // TODO: hide api key
@@ -57,15 +42,15 @@
   }
   
   const addProduct = (id, qty) => {
-    if (cartProducts.value.find(e => e.id === id)) {
+    if (cart.value.find(e => e.id === id)) {
       // If product is already in cart then...
-      cartProducts.value.filter((e => e.id === id)).map(item => {
+      cart.value.filter((e => e.id === id)).map(item => {
         // Add one to current quantity
         item.quantity = item.quantity + qty
       })
     } else {
       // Else push new product to cartproducts
-      cartProducts.value.push({
+      cart.value.push({
         'id': id,
         'quantity': qty
       })
@@ -80,14 +65,7 @@
   <div class="container" v-if="products.length">
     <!-- TODO: get category name -->
     <h1>Koeken</h1>
-    <div v-if="cartProducts.length">
-      <h2 class="title">Winkelwagen</h2>
-      <div class="cart">
-        <div v-for="product in cartProducts" :key="product.id" class="cart-product">
-          {{ product.id }} x {{ product.quantity }}
-        </div>
-      </div>
-    </div>
+    <Cart />
     <FilterBy />
     <Grid v-if="products.length" :products="products" @addtocart="(id, qty) => addProduct(id, qty)" />    
   </div>
