@@ -60,7 +60,7 @@
 </script>
 
 <template>
-  <div class="container" v-if="products.length">
+  <div class="container">
     <!-- TODO: get category name -->
     <h1>Koeken</h1>
     <Cart />

@@ -91,7 +91,7 @@
   <div class="filters">
       <h2 class="title">Filter op</h2>
       <div class="tabs">
-        <template v-if="brands">
+        <template v-if="brands.length">
           <button class="trigger">Merk</button>
             <div class="tab">
               <ul class="filter-list">
