@@ -1,3 +1,7 @@
+<style>
+  @import 'assets/app.css';
+</style>
+
 <script setup>
   const route = useRoute()
   const originalProducts = useOriginalProducts();
