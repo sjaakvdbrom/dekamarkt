@@ -1,9 +1,13 @@
 <style>
   @import "normalize.css";
 
+  html,
   body {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+  }
+
+  body {
     font-family: 'Inter';
   }
 
@@ -23,21 +27,6 @@
   h5,
   h6 {
     margin-top: 0;
-  }
-</style>
-
-<style scoped>
-  .cart {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #dedede;
-    border-radius: 5px;
-    box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
-  }
-
-  .cart-product:not(:last-of-type) {
-    margin-bottom: 10px;
   }
 </style>
 
