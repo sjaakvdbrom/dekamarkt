@@ -42,19 +42,18 @@
 </style>
 
 <script setup>
+  const route = useRoute()
   const originalProducts = useOriginalProducts();
   const products = useProducts();
   const brands = useBrands();
-  
+  const { data } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/${route.params.group}/${route.params.subgroup}/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
+
   const getProducts = async () => {
-    // TODO: hide api key
-    const { data } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/55/103/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
     originalProducts.value = toRaw(data.value)
     products.value = toRaw(data.value)
     brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
-    console.log(toRaw(data.value))
   }
-  
+
   onMounted(getProducts);
 
 </script>
