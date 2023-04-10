@@ -1,7 +1,7 @@
 <style scoped>
   .price {
     display: flex;
-    color: #000;
+    color: var(--color-text);
     font-weight: bold;
     line-height: 1;
   }
@@ -12,7 +12,7 @@
   }
 
   .decimals {
-    font-size: 14px;
+    font-size: var(--font-size-small);
     line-height: 1;
     vertical-align: top;
     transform: translateX(-0.2em) translateY(0.15em);

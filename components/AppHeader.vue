@@ -3,7 +3,7 @@
     padding: 15px 0;
     margin-bottom: 30px;
     background-color: #fff;
-    border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .nav-link:not(:hover) {

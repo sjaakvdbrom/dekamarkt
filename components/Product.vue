@@ -5,7 +5,7 @@
     flex-direction: column;
     width: calc((100% / var(--flex-items)) - (((var(--flex-items) - 1) / var(--flex-items)) * var(--flex-gap)));
     padding: 15px;
-    border: 1px solid #dedede;
+    border: 1px solid var(--color-border);
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
   }
@@ -25,15 +25,15 @@
 
   .title {
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: var(--font-size-default);
     font-weight: bold;
   }
 
   .muted {
     margin-top: auto;
     margin-bottom: 10px;
-    color: #888;
-    font-size: 14px;
+    color: var(--color-muted);
+    font-size: var(--font-size-small);
   }
 
   .button {
@@ -54,7 +54,7 @@
     text-align: center;
     appearance: none;
     -moz-appearance: textfield;
-    border: 1px solid #dedede;
+    border: 1px solid var(--color-border);
   }
 
   .quantity::-webkit-outer-spin-button,
@@ -67,7 +67,7 @@
     padding: 8px;
     appearance: none;
     border: none;
-    background-color: #dedede;
+    background-color: var(--color-border);
     cursor: pointer;
   }
 

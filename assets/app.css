@@ -6,14 +6,26 @@ body {
   padding: 0;
 }
 
+:root {
+  --color-text: #000;
+  --color-muted: #888;
+  --color-border: #dedede;
+  --page-gutter: 15px;
+  --font-size-default: 16px;
+  --font-size-small: 14px;
+}
+
 body {
   font-family: 'Inter';
-  color: #000;
+  font-size: var(--font-size-default);
+  color: var(--color-text);
 }
 
 .container {
   margin: 0 auto;
-  max-width: 1200px;
+  padding-right: var(--page-gutter);
+  padding-left: var(--page-gutter);
+  max-width: calc(1200px + (var(--page-gutter) * 2));
 }
 
 .page-container {
@@ -34,5 +46,5 @@ h6 {
 }
 
 a {
-  color: #000;
+  color: var(--color-text);
 }

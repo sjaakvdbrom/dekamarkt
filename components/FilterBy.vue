@@ -12,7 +12,7 @@
     padding: 10px 15px;
     border: none;
     background-color: #fff;
-    border: 1px solid #dedede;
+    border: 1px solid var(--color-border);
     border-radius: 5px 5px 0 0;
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
     cursor: pointer;
@@ -35,7 +35,7 @@
     position: relative;
     padding: 20px;
     background-color: #fff;
-    border: 1px solid #dedede;
+    border: 1px solid var(--color-border);
     border-radius: 0 5px 5px 5px;
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
   }
