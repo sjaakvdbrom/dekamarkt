@@ -115,6 +115,13 @@
   const props = defineProps(['product']);
   const cart = useCart();
   const quantity = ref(1);
+  const productName = computed(() => {
+    if (props.product.SubDescription) {
+      return props.product.MainDescription + ' ' + props.product.SubDescription
+    } else {
+      return props.product.MainDescription 
+    }
+  })
   const productPrice = props.product.ProductPrices[0].Price
   const productId = props.product.ProductID;
   const cartOffCanvas = useCartOffcanvas();
@@ -132,7 +139,7 @@
       // Else push new product to cartproducts
       cart.value.push({
         'id': productId,
-        'name': props.product.MainDescription + ' ' + props.product.SubDescription,
+        'name': productName,
         'price': productPrice,
         'quantity': qty
       })
@@ -147,7 +154,7 @@
         <img :src="product.ProductPictures[0].Url" class="image"/>
       </a>
       <h2 class="title">
-        {{product.MainDescription}} {{product.SubDescription}} 
+        {{productName}} 
       </h2>
       <div v-if="product.CommercialContent" class="muted">{{product.CommercialContent}}</div>
       <div class="product-price">

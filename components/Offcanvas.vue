@@ -5,8 +5,8 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: 30vw;
-    padding: 40px;
+    width: calc(100vw - 90px);
+    padding: 15px;
     background-color: #fff;
     border-left: 1px solid var(--color-border);
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
@@ -43,6 +43,15 @@
     visibility: hidden;
     transform: translateX(100%);
     transition: visibility 0s 0.15s linear, transform 0.15s ease-in;
+  }
+
+  @media (min-width: 940px) {
+    .offcanvas {
+      width: 30vw;
+      min-width: 400px;
+      max-width: 650px;
+      padding: 40px;
+    }
   }
 </style>
 
