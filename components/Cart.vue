@@ -15,7 +15,7 @@
 
 <script setup>
   const cart = useCart();
-  const CartTotalPrice = ref(0)
+  const CartTotalPrice = ref(cart.value.reduce((total, item) => item.price * item.quantity + total, 0).toFixed(2))
 
   watch(cart.value, () => {
     CartTotalPrice.value = cart.value.reduce((total, item) => item.price * item.quantity + total, 0).toFixed(2)
