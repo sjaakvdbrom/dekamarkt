@@ -132,7 +132,7 @@
       // Else push new product to cartproducts
       cart.value.push({
         'id': productId,
-        'name': props.product.MainDescription,
+        'name': props.product.MainDescription + ' ' + props.product.SubDescription,
         'price': productPrice,
         'quantity': qty
       })
