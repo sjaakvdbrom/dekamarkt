@@ -117,6 +117,7 @@
   const quantity = ref(1);
   const productPrice = props.product.ProductPrices[0].Price
   const productId = props.product.ProductID;
+  const cartOffCanvas = useCartOffcanvas();
 
   const addProduct = (qty) => {
     quantity.value = 1;
@@ -126,6 +127,7 @@
         // Add one to current quantity
         item.quantity = item.quantity + qty
       })
+      cartOffCanvas.value = true
     } else {
       // Else push new product to cartproducts
       cart.value.push({
@@ -134,6 +136,7 @@
         'price': productPrice,
         'quantity': qty
       })
+      cartOffCanvas.value = true
     }
   }
 </script>

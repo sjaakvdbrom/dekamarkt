@@ -3,3 +3,4 @@ export const useOriginalProducts = () => useState("api-original-products", () =>
 export const useBrands = () => useState("api-brands", () => []);
 export const useCart = () => useState("cart", () => []);
 export const useCartTotal = () => useState("cart-total", () => 0);
+export const useCartOffcanvas = () => useState("cart-offcanvas", () => false);
