@@ -15,15 +15,20 @@
 
 <script setup>
   const cart = useCart();
+  const CartTotalPrice = ref(0)
+
+  watch(cart.value, () => {
+    CartTotalPrice.value = cart.value.reduce((total, item) => item.price * item.quantity + total, 0).toFixed(2)
+  })
 </script>
 
 <template>
   <div v-if="cart.length">
     <h2 class="title">Winkelwagen</h2>
     <div class="cart">
-      <div v-for="product in cart" :key="product.id" class="cart-product">
-        {{ product.id }} x {{ product.quantity }}
-      </div>
+      <CartItem v-for="product in cart" :key="product.id * product.quantity" :product="product"/>
+      <h3>Total</h3>
+      <Price size="xl" :price="CartTotalPrice" :key="CartTotalPrice" />
     </div>
   </div>
 </template>
