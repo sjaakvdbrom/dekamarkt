@@ -7,16 +7,11 @@
   const originalProducts = useOriginalProducts();
   const products = useProducts();
   const brands = useBrands();
-  const { data } = await useFetch(`https://api.dekamarkt.nl/v1/assortmentcache/group/${route.params.group}/${route.params.subgroup}/?api_key=6d3a42a3-6d93-4f98-838d-bcc0ab2307fd`)
+  const response = await getCategoryProducts(route.params.group, route.params.subgroup);
 
-  const getProducts = async () => {
-    originalProducts.value = toRaw(data.value)
-    products.value = toRaw(data.value)
-    brands.value = [...new Set(toRaw(data.value).map((item) => item.Brand))]
-    // console.log(toRaw(data.value))
-  }
-
-  onMounted(getProducts);
+  originalProducts.value = response.value
+  products.value = response.value
+  brands.value = [...new Set(response.value.map((item) => item.Brand))]
 
 </script>
 

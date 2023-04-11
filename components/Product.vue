@@ -115,19 +115,22 @@
   const props = defineProps(['product']);
   const cart = useCart();
   const quantity = ref(1);
+  const productPrice = props.product.ProductPrices[0].Price
+  const productId = props.product.ProductID;
 
-  const addProduct = (id, qty) => {
+  const addProduct = (qty) => {
     quantity.value = 1;
-    if (cart.value.find(e => e.id === id)) {
+    if (cart.value.find(e => e.id === productId)) {
       // If product is already in cart then...
-      cart.value.filter((e => e.id === id)).map(item => {
+      cart.value.filter((e => e.id === productId)).map(item => {
         // Add one to current quantity
         item.quantity = item.quantity + qty
       })
     } else {
       // Else push new product to cartproducts
       cart.value.push({
-        'id': id,
+        'id': productId,
+        'price': productPrice,
         'quantity': qty
       })
     }
@@ -144,7 +147,7 @@
       </h2>
       <div v-if="product.CommercialContent" class="muted">{{product.CommercialContent}}</div>
       <div class="product-price">
-        <Price :price="product.ProductPrices[0].Price"/>
+        <Price :price="productPrice"/>
       </div>
       <div class="button-wrapper">
         <div class="quantity-controller">
@@ -152,7 +155,7 @@
           <input type="number" v-model="quantity" class="quantity">
           <button @click="quantity++" type="button" class="qty-btn qty-btn--add">+</button>
         </div>
-        <Button @click="addProduct(product.ProductID, quantity)">In winkelwagen</Button>
+        <Button @click="addProduct(quantity)">In winkelwagen</Button>
       </div>
     </article>
 </template>
