@@ -32,7 +32,7 @@
     <h2 class="title">Winkelwagen</h2>
     <div class="cart">
       <CartItem v-for="product in cart" :key="product.id * product.quantity" :product="product"/>
-      <h3>Total</h3>
+      <h3>Totaal</h3>
       <Price size="xl" :price="CartTotalPrice" :key="CartTotalPrice" />
     </div>
   </div>

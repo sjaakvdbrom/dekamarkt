@@ -8,6 +8,6 @@
 
 <template>
   <div class="cart-product">
-    {{ product.id }} x {{ product.quantity }} = <Price :price="totalPrice()"/>
+    {{ product.quantity }} x {{ product.name }} = <Price :price="totalPrice()"/>
   </div>
 </template>
