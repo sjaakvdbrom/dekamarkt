@@ -1,3 +1,46 @@
+<style scoped>
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  .pages {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+  }
+
+  .button {
+    padding: 5px 10px;
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+  }
+
+  .button:not([disabled]):hover {
+    background-color: #dedede;
+    cursor: pointer;
+  }
+
+  .page-button {
+    border: none;
+    border-radius: 0;
+  }
+
+  .page-button.active {
+    background-color: var(--color-border);
+  }
+
+  .page-item:not(:last-child) {
+    border-right: 1px solid var(--color-border);
+  }
+</style>
+
 <script setup>
   const props = defineProps(['currentPage', 'totalPages', 'currentPage'])
   const emit = defineEmits(['pagechanged'])
@@ -10,6 +53,10 @@
   const isInLastPage = computed(() => {
     return props.currentPage === props.totalPages;
   })
+
+  const isPageActive = (page) => {
+    return props.currentPage === page;
+  }
 
   const startPage = computed(() => {
     if (props.currentPage === 1) {
@@ -70,61 +117,44 @@
 </script>
 
 <template>
-  <ul>
-    <li>
-      <button
-        type="button"
-        @click="onClickFirstPage"
-        :disabled="isInFirstPage"
-      >
-        First
-      </button>
-    </li>
-
-    <li>
-      <button
-        type="button"
-        @click="onClickPreviousPage"
-        :disabled="isInFirstPage"
-      >
-        Previous
-      </button>
-    </li>
+  <div class="pagination">
+    <button
+      type="button"
+      @click="onClickPreviousPage"
+      :disabled="isInFirstPage"
+      class="button"
+    >
+      Vorige
+    </button>
 
     <!-- Visible Buttons Start -->
-    <li
-      v-for="page in pages"
-      :key="page.name"
-    >
-      <button
-        type="button"
-        @click="onClickPage(page.name)"
-        :disabled="page.isDisabled"
+    <ul class="pages">
+      <li
+        v-for="page in pages"
+        :key="page.name"
+        class="page-item"
       >
-        {{ page.name }}
-      </button>
-    </li>
+        <button
+          type="button"
+          @click="onClickPage(page.name)"
+          :disabled="page.isDisabled"
+          class="page-button button"
+          :class="{ active: isPageActive(page.name) }"
+        >
+          {{ page.name }}
+        </button>
+      </li>
+    </ul>
 
     <!-- Visible Buttons End -->
 
-    <li>
-      <button
-        type="button"
-        @click="onClickNextPage"
-        :disabled="isInLastPage"
-      >
-        Next
-      </button>
-    </li>
-
-    <li>
-      <button
-        type="button"
-        @click="onClickLastPage"
-        :disabled="isInLastPage"
-      >
-        Last
-      </button>
-    </li>
-  </ul>
+    <button
+      type="button"
+      @click="onClickNextPage"
+      :disabled="isInLastPage"
+      class="button"
+    >
+      Volgende
+    </button>
+  </div>
 </template>
