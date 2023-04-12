@@ -1,22 +1,36 @@
 <style scoped>
-  .product {
-    display: flex;
-    gap: 30px;
-  }
-
-  .left {
-    width: 40%;
-  }
-
-  .right {
-    width: 60%;
-  }
-
   .info-box {
     padding: 15px;
     border: 1px solid var(--color-border);
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
+  }
+
+  .image {
+    max-height: 60vw;
+  }
+
+  .image-container {
+    text-align: center;
+  }
+
+  .product-price {
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 940px) {
+    .product {
+      display: flex;
+      gap: 10%;
+    }
+
+    .left {
+      width: 50%;
+    }
+
+    .right {
+      width: 40%;
+    }
   }
 </style>
 
@@ -70,7 +84,9 @@
     <article v-for="item in product" :key="item.ProductID" class="product">
       <div class="column left">
         <template v-if="item.ProductPictures.length">
-          <img :src="item.ProductPictures[0].Url" class="image"/>
+          <div class="image-container">
+            <img :src="item.ProductPictures[0].Url" class="image"/>
+          </div>
         </template>
       </div>
       <div class="column right">
@@ -79,7 +95,7 @@
             {{ productName }}
           </h1>
           <div class="product-price">
-            <Price :price="item.ProductPrices[0].Price"/>
+            <Price size="xl" :price="item.ProductPrices[0].Price"/>
           </div>
           <div class="button-wrapper">
             <div class="quantity-controller">
@@ -87,7 +103,7 @@
               <input type="number" v-model="quantity" class="quantity">
               <button @click="quantity++" type="button" class="qty-btn qty-btn--add">+</button>
             </div>
-            <Button @click="addProduct(quantity)">In winkelwagen</Button>
+            <Button @click="addProduct(quantity)" size="xxl" class="full">In winkelwagen</Button>
           </div>
         </div>
       </div>

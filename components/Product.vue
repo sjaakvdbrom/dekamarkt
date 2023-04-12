@@ -44,39 +44,12 @@
     margin-bottom: 15px;
   }
 
-  .quantity-controller {
-    display: flex;
-    margin-bottom: 15px;
+  .title-link {
+    display: inline-block;
   }
 
-  .quantity {
-    width: 35px;
-    text-align: center;
-    appearance: none;
-    -moz-appearance: textfield;
-    border: 1px solid var(--color-border);
-  }
-
-  .quantity::-webkit-outer-spin-button,
-  .quantity::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  .qty-btn {
-    padding: 8px;
-    appearance: none;
-    border: none;
-    background-color: var(--color-border);
-    cursor: pointer;
-  }
-
-  .qty-btn--minus {
-    border-radius: 3px 0 0 3px;
-  }
-
-  .qty-btn--add {
-    border-radius: 0 3px 3px 0;
+  .title-link:not(:hover) {
+    text-decoration: none;
   }
 
   @media (min-width: 600px) {
@@ -154,9 +127,13 @@
     <NuxtLink :to="`/${route.params.group}/${route.params.subgroup}/${productId}`" class="image-link">
       <img :src="product.ProductPictures[0].Url" class="image"/>
     </NuxtLink>
-    <h2 class="title">
-      {{productName}} 
-    </h2>
+    <div class="title-container">
+      <NuxtLink :to="`/${route.params.group}/${route.params.subgroup}/${productId}`" class="title-link">
+        <h2 class="title">
+          {{productName}} 
+        </h2>
+      </NuxtLink>
+    </div>
     <div v-if="product.CommercialContent" class="muted">{{product.CommercialContent}}</div>
     <div class="product-price">
       <Price :price="productPrice"/>
