@@ -25,6 +25,10 @@
     margin-bottom: 20px;
   }
 
+  .quantity-controller {
+    margin-bottom: 25px;
+  }
+
   .voedingswaardes {
     margin-bottom: 15px;
   }
