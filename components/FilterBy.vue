@@ -108,6 +108,10 @@
     filtered.value = false
     setStartingProducts();
   }
+
+  onUnmounted(() => {
+    filtered.value = false
+  })
 </script>
 
 <template>
