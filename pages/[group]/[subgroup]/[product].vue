@@ -30,6 +30,10 @@
   }
 
   @media (min-width: 940px) {
+    .info-box {
+      padding: 25px;
+    }
+
     .product {
       display: flex;
       gap: 10%;
