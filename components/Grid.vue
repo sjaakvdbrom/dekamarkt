@@ -9,9 +9,10 @@
 
 <script setup>
   const originalProducts = useOriginalProducts();
+  const filtered = useFiltering();
   const products = useProducts();
-  const currentPage = ref(1);
-  const perPage = ref(16);
+  const currentPage = useCurrentPage();
+  const perPage = usePerPage();
   const onPageChange = (page) => {
     currentPage.value = page;
     const start = Math.floor(perPage.value * currentPage.value - perPage.value)
@@ -24,7 +25,7 @@
     return Math.ceil(originalProducts.value.length / perPage.value)
   })
 
-  products.value = originalProducts.value.slice(0, perPage.value)
+  setStartingProducts();
 </script>
 
 <template>
@@ -33,7 +34,7 @@
       <Product :product="product"/>
     </template>
   </div>
-  <div v-if="products.length" class="pagination-container">
+  <div v-if="products.length && filtered === false" class="pagination-container">
     <pagination
       v-if="originalProducts.length > perPage"
       :totalPages="totalPages"

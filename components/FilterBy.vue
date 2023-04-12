@@ -92,7 +92,7 @@
   const originalProducts = useOriginalProducts();
   const products = useProducts();
   const brands = useBrands();
-  const filtered = ref(false)
+  const filtered = useFiltering();
   const brandButton = ref(null);
 
   const filter = (event, brand) => {
@@ -106,7 +106,7 @@
   const reset = () => {
     brandButton.value.map(item => item.classList.remove('active'))
     filtered.value = false
-    products.value = originalProducts.value;
+    setStartingProducts();
   }
 </script>
 
