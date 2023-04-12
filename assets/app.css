@@ -87,3 +87,29 @@ img {
 .qty-btn--add {
   border-radius: 0 3px 3px 0;
 }
+
+.muted {
+  color: var(--color-muted);
+  font-size: var(--font-size-small);
+}
+
+.data-table {
+  width: 100%;
+  table-layout: fixed;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.data-table__row:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+
+.data-table__heading,
+.data-table__value {
+  padding: 7px 10px;
+  font-size: var(--font-size-small);
+}
+
+.data-table__value {
+  color: var(--color-muted);
+}

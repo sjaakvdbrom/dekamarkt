@@ -32,8 +32,6 @@
   .muted {
     margin-top: auto;
     margin-bottom: 10px;
-    color: var(--color-muted);
-    font-size: var(--font-size-small);
   }
 
   .button {

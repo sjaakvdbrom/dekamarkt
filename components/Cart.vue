@@ -1,6 +1,7 @@
 <style scoped>
   .cart {
     width: 100%;
+    border-collapse: collapse;
     margin-bottom: 30px;
   }
 

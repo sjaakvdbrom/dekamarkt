@@ -14,8 +14,19 @@
     text-align: center;
   }
 
+  .title {
+    margin-bottom: 15px;
+  }
   .product-price {
     margin-bottom: 20px;
+  }
+
+  .muted {
+    margin-bottom: 20px;
+  }
+
+  .voedingswaardes {
+    margin-bottom: 15px;
   }
 
   @media (min-width: 940px) {
@@ -75,7 +86,7 @@
     }
   }
 
-  // console.log(toRaw(product.value))
+  console.log(toRaw(product.value))
 </script>
 
 
@@ -94,6 +105,13 @@
           <h1 class="title">
             {{ productName }}
           </h1>
+          <div v-if="item.CommercialContent" class="muted">{{item.CommercialContent}}</div>
+          <table v-if="item.Nutrition.length" class="data-table voedingswaardes">
+            <tr v-for="nutrition in item.Nutrition" :key="nutrition.NutritionID" class="data-table__row">
+              <th class="data-table__heading">{{ nutrition.MainValue.Text }}</th>
+              <td class="data-table__value">{{ nutrition.MainValue.ValueAsSold }}</td>
+            </tr>
+          </table>
           <div class="product-price">
             <Price size="xl" :price="item.ProductPrices[0].Price"/>
           </div>
