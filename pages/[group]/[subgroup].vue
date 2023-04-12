@@ -17,10 +17,14 @@
 
 <template>
   <div class="page-container container">
-    <!-- TODO: get category name -->
-    <h1>Koeken</h1>
-    <Cart />
-    <FilterBy />
-    <Grid />    
+    <template v-if="!route.params.product">
+      <!-- TODO: get category name -->
+      <h1>Koeken</h1>
+      <FilterBy />
+      <Grid />
+    </template>
+    <template v-else>
+      <NuxtPage />
+    </template>
   </div>
 </template>

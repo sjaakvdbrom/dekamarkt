@@ -18,5 +18,6 @@
         <NuxtLink to="/" class="nav-link">Home</NuxtLink>
       </nav>
     </div>
+    <Cart />
   </header>
 </template>

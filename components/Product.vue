@@ -112,6 +112,7 @@
 </style>
 
 <script setup>
+  const route = useRoute()
   const props = defineProps(['product']);
   const cart = useCart();
   const quantity = ref(1);
@@ -150,23 +151,23 @@
 
 <template>
   <article class="item">
-      <a v-if="product.ProductPictures.length" class="image-link">
-        <img :src="product.ProductPictures[0].Url" class="image"/>
-      </a>
-      <h2 class="title">
-        {{productName}} 
-      </h2>
-      <div v-if="product.CommercialContent" class="muted">{{product.CommercialContent}}</div>
-      <div class="product-price">
-        <Price :price="productPrice"/>
+    <NuxtLink :to="`/${route.params.group}/${route.params.subgroup}/${productId}`" class="image-link">
+      <img :src="product.ProductPictures[0].Url" class="image"/>
+    </NuxtLink>
+    <h2 class="title">
+      {{productName}} 
+    </h2>
+    <div v-if="product.CommercialContent" class="muted">{{product.CommercialContent}}</div>
+    <div class="product-price">
+      <Price :price="productPrice"/>
+    </div>
+    <div class="button-wrapper">
+      <div class="quantity-controller">
+        <button @click="quantity > 1 ? quantity-- : ''" type="button" class="qty-btn qty-btn--minus">-</button>
+        <input type="number" v-model="quantity" class="quantity">
+        <button @click="quantity++" type="button" class="qty-btn qty-btn--add">+</button>
       </div>
-      <div class="button-wrapper">
-        <div class="quantity-controller">
-          <button @click="quantity > 1 ? quantity-- : ''" type="button" class="qty-btn qty-btn--minus">-</button>
-          <input type="number" v-model="quantity" class="quantity">
-          <button @click="quantity++" type="button" class="qty-btn qty-btn--add">+</button>
-        </div>
-        <Button @click="addProduct(quantity)">In winkelwagen</Button>
-      </div>
-    </article>
+      <Button @click="addProduct(quantity)">In winkelwagen</Button>
+    </div>
+  </article>
 </template>

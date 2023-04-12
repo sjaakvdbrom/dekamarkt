@@ -48,3 +48,7 @@ h6 {
 a {
   color: var(--color-text);
 }
+
+img {
+  max-width: 100%;
+}
